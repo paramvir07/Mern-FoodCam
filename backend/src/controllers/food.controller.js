@@ -2,19 +2,21 @@ import foodModel from "../models/food.model.js";
 import foodPartnerModel from "../models/foodpartner.model.js";
 
 const addFood = async (req,res) => {
-    const { name, video, description } = req.body || {};
+    const { name,description, category } = req.body || {};
 
     if (!req.body) {
       return res.status(400).json({
-        error: "Missing request body. Make sure you're sending JSON and setting Content-Type: application/json.",
+        error: "Missing request body.",
       });
     }
 
     const authUser= req.authUser;
 
-    const food=await foodModel.create({name, video, description,
-        foodPartner: authUser.id
+    const alreadyExists= await foodModel.findOne({name, foodPartner: authUser.id}).collation({locale: "en", strength: 1});
+    if(alreadyExists) return res.status(409).json({error: "Food already exists"});
 
+    const food=await foodModel.create({name,description, category,
+        foodPartner: authUser.id
     })
 
     const partner= await foodPartnerModel.findById(authUser.id)

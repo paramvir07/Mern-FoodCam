@@ -5,12 +5,19 @@ const foodSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    video:{
+    image:{
         type: String,
-        required: true
     },
     description:{
         type: String
+    },
+    category:{
+        type: String,
+        required: true
+    },
+    rating:{
+        type: Number,
+        default: 0
     },
     foodPartner:{
         type: mongoose.Schema.Types.ObjectId,

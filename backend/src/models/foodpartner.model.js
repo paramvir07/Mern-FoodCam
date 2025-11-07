@@ -16,7 +16,11 @@ const foodPartnerSchema = new mongoose.Schema({
     food:[{
         type: mongoose.Schema.Types.ObjectId,
         ref: "food"
-    }]
+    }],
+    averageRating:{
+        type: Number,
+        default: 0
+    }
 },
 {
     timestamps: true

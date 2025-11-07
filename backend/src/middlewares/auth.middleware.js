@@ -16,8 +16,8 @@ const isLoggedIn=(req,res,next)=>{
     
 }
 
-const isUser= async(req,res,next)=>{
-    const authUser=await userModel.findById(req.authUser._id);
+const isUser = async(req,res,next)=>{
+    const authUser = await userModel.findById(req.authUser.id);
     if(!authUser) return res.status(401).json({error: "Not authenticated as a user"});
     next();
 }

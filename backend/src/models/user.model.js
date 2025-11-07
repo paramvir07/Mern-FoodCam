@@ -12,6 +12,14 @@ const userSchema=new mongoose.Schema({
     },
     passwordHash:{
         type: String
+    },
+    rating:[{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "food" 
+    }],
+    cart:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "cart"
     }
 },
 {

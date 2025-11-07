@@ -1,5 +1,6 @@
 import userModel from "../models/user.model.js";
 import foodPartnerModel from "../models/foodpartner.model.js";
+import cartModel from "../models/cart.model.js";
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
@@ -17,7 +18,9 @@ const registerUser = async (req, res)=>{
     const passwordHash= await bcrypt.hash(password, 10);
 
     const created_user=await userModel.create({fullname, email, passwordHash});
+    const created_cart=await cartModel.create({user: created_user._id});
 
+    await userModel.findByIdAndUpdate(created_user._id, {cart: created_cart._id}, {new: true});
     const token = jwt.sign({id: created_user._id, email}, jwt_key, {expiresIn: "7d"});
 
     res.cookie("token", token, {
