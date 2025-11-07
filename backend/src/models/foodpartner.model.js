@@ -12,7 +12,11 @@ const foodPartnerSchema = new mongoose.Schema({
     },
     passwordHash:{
         type: String
-    }
+    },
+    food:[{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "food"
+    }]
 },
 {
     timestamps: true

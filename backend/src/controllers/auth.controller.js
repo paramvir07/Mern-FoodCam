@@ -59,9 +59,7 @@ res.clearCookie("token", {
   sameSite: "strict",
 });
 return res.status(200).json({ message: "Logged out successfully" });
-
 }
-
 
 const registerFoodPartner = async (req, res)=>{
     const {name, email, password} = req.body;
@@ -109,13 +107,5 @@ const loginFoodPartner = async (req, res)=>{
     
 }
 
-const logoutFoodPartner = (req, res)=>{
-    res.clearCookie("token", {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
-    sameSite: "strict",
-    });
-return res.status(200).json({ message: "Logged out successfully" });
-}
 
-export default {registerUser, loginUser, logoutUser, registerFoodPartner, loginFoodPartner, logoutFoodPartner};
+export default {registerUser, loginUser, logoutUser, registerFoodPartner, loginFoodPartner};
