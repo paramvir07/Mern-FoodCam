@@ -2,8 +2,9 @@ import mongoose from "mongoose";
 
 const cartSchema=new  mongoose.Schema({
     food:[{
+        _id: false,
         foodId:{type: mongoose.Schema.Types.ObjectId, ref: "food"},
-        quantity: {type: Number, default: 1}
+        qty: {type: Number, default: 1}
     }],
     user:{
         type: mongoose.Schema.Types.ObjectId,

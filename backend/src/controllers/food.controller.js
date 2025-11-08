@@ -2,8 +2,8 @@ import foodModel from "../models/food.model.js";
 import foodPartnerModel from "../models/foodpartner.model.js";
 
 const addFood = async (req,res) => {
+  try {
     const { name,description, category } = req.body || {};
-
     if (!req.body) {
       return res.status(400).json({
         error: "Missing request body.",
@@ -24,7 +24,27 @@ const addFood = async (req,res) => {
     await partner.save();
 
     res.status(201).json({message: "Food item created successfully!!"})
+  } catch (error) {
+    res.status(500).json({
+    message: "error adding food",
+    error: error.message
+  })
+  }
+    
 
 }
+const readFood = async (req,res)=>{
+try {
+  const foodList = await foodModel.find().populate('foodPartner');
+  res.json({foodList});
+}
+catch (error) {
+  res.status(500).json({
+    message: "error getting food list data ",
+    error: error.message
+  })
+}
+}
 
-export default {addFood};
+
+export default {addFood ,readFood};

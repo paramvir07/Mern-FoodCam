@@ -7,4 +7,6 @@ const router = express.Router();
 
 router.post("/cart/addfood/:foodId", authMiddleware.isLoggedIn, authMiddleware.isUser, cartController.cartAddFood);
 
+router.get("/cart/read", authMiddleware.isLoggedIn, authMiddleware.isUser, cartController.readCart)
+
 export default router;
